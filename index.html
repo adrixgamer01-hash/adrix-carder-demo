@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080810">
+<title>ADRIX CARDER | Demo Gallery</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #080810;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  background: #792bff;
+  filter: blur(180px);
+  opacity: .18;
+  top: 10%;
+  left: 30%;
+  pointer-events: none;
+}
+
+header {
+  height: 75px;
+  padding: 0 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #242333;
+  background: rgba(8,8,16,.85);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(15px);
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.logo span {
+  color: #a66bff;
+}
+
+nav {
+  display: flex;
+  gap: 25px;
+}
+
+nav a {
+  color: #aaa;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+nav a:hover {
+  color: #b77aff;
+}
+
+.hero {
+  text-align: center;
+  padding: 90px 20px 55px;
+  position: relative;
+}
+
+.tag {
+  display: inline-block;
+  border: 1px solid #7542bc;
+  color: #c59aff;
+  padding: 8px 18px;
+  border-radius: 30px;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.hero h1 {
+  font-size: clamp(38px, 8vw, 75px);
+  margin: 25px 0 15px;
+  font-weight: 900;
+}
+
+.hero h1 span {
+  background: linear-gradient(90deg,#a46aff,#e3b4ff);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.hero p {
+  color: #999;
+  max-width: 540px;
+  margin: auto;
+  line-height: 1.7;
+}
+
+.hero-btn {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 14px 28px;
+  background: linear-gradient(90deg,#7026db,#a35cff);
+  color: white;
+  text-decoration: none;
+  border-radius: 9px;
+  font-weight: bold;
+}
+
+.floating-area {
+  height: 160px;
+  position: relative;
+  overflow: hidden;
+}
+
+.float-card {
+  position: absolute;
+  width: 115px;
+  height: 72px;
+  border-radius: 12px;
+  border: 1px solid #ffffff30;
+  background: linear-gradient(135deg,#28174b,#8143c9);
+  box-shadow: 0 10px 40px #792bff30;
+  animation: float 5s ease-in-out infinite;
+}
+
+.float-card:nth-child(1) {
+  left: 15%;
+  top: 25px;
+  transform: rotate(-15deg);
+}
+
+.float-card:nth-child(2) {
+  left: 43%;
+  top: 45px;
+  background: linear-gradient(135deg,#153c50,#287b9c);
+  animation-delay: 1s;
+}
+
+.float-card:nth-child(3) {
+  right: 15%;
+  top: 20px;
+  background: linear-gradient(135deg,#4c2240,#bc4c91);
+  animation-delay: 2s;
+}
+
+@keyframes float {
+  0%,100% { translate: 0 0; }
+  50% { translate: 0 -18px; }
+}
+
+.section {
+  padding: 45px 7%;
+  position: relative;
+}
+
+.section-heading {
+  margin-bottom: 25px;
+}
+
+.section-heading h2 {
+  font-size: 27px;
+}
+
+.section-heading p {
+  color: #858594;
+  margin-top: 9px;
+  font-size: 14px;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.filter {
+  padding: 10px 19px;
+  border: 1px solid #343044;
+  border-radius: 25px;
+  background: #11111c;
+  color: #bbb;
+  cursor: pointer;
+}
+
+.filter.active,
+.filter:hover {
+  background: #7935d7;
+  color: white;
+  border-color: #7935d7;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap: 20px;
+}
+
+.card {
+  background: linear-gradient(145deg,#171522,#101019);
+  border: 1px solid #30283f;
+  border-radius: 15px;
+  padding: 20px;
+  transition: .3s;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: #9959ed;
+  box-shadow: 0 10px 35px #792bff20;
+}
+
+.demo-card {
+  height: 145px;
+  padding: 18px;
+  border-radius: 12px;
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: linear-gradient(130deg,#312052,#8c48d5);
+}
+
+.demo-card.blue {
+  background: linear-gradient(130deg,#173c52,#3985aa);
+}
+
+.demo-card.pink {
+  background: linear-gradient(130deg,#50223d,#b74e86);
+}
+
+.demo-card.gold {
+  background: linear-gradient(130deg,#514020,#ae914b);
+}
+
+.demo-card small {
+  letter-spacing: 2px;
+  font-size: 10px;
+}
+
+.demo-card strong {
+  font-size: 17px;
+  letter-spacing: 1px;
+}
+
+.card h3 {
+  font-size: 17px;
+}
+
+.card p {
+  color: #9693a4;
+  font-size: 13px;
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+.demo-label {
+  display: inline-block;
+  margin-top: 13px;
+  color: #c9a5ff;
+  font-size: 11px;
+  border: 1px solid #7443aa;
+  padding: 6px 10px;
+  border-radius: 20px;
+}
+
+.notice {
+  margin-top: 30px;
+  padding: 18px;
+  border: 1px solid #47366b;
+  background: #171225;
+  border-radius: 12px;
+  color: #c7b6df;
+  line-height: 1.6;
+  font-size: 13px;
+}
+
+footer {
+  margin-top: 50px;
+  padding: 35px 20px;
+  text-align: center;
+  border-top: 1px solid #292435;
+  color: #777;
+  font-size: 13px;
+  line-height: 2;
+}
+
+@media(max-width:600px) {
+  header { padding: 0 5%; }
+  nav { gap: 12px; }
+  nav a { font-size: 11px; }
+  .logo { font-size: 17px; }
+  .hero { padding-top: 65px; }
+  .section { padding: 35px 5%; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">ADRIX <span>CARDER</span></div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#about">About</a>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <div class="tag">WELCOME TO ADRIX CARDER</div>
+  <h1>Explore The <span>Digital World</span></h1>
+  <p>
+    Discover our futuristic digital card collection.
+    A creative showcase of fictional card designs and technology.
+  </p>
+  <a href="#gallery" class="hero-btn">Explore Gallery →</a>
+</section>
+
+<div class="floating-area">
+  <div class="float-card"></div>
+  <div class="float-card"></div>
+  <div class="float-card"></div>
+</div>
+
+<section class="section" id="gallery">
+
+  <div class="section-heading">
+    <h2>Digital Card Gallery</h2>
+    <p>Explore our fictional design collection.</p>
+  </div>
+
+  <div class="filters">
+    <button class="filter active" onclick="filterCards('all',this)">All</button>
+    <button class="filter" onclick="filterCards('purple',this)">Purple</button>
+    <button class="filter" onclick="filterCards('blue',this)">Blue</button>
+    <button class="filter" onclick="filterCards('pink',this)">Pink</button>
+    <button class="filter" onclick="filterCards('gold',this)">Gold</button>
+  </div>
+
+  <div class="grid">
+
+    <div class="card" data-type="purple">
+      <div class="demo-card">
+        <small>ADRIX • DIGITAL</small>
+        <strong>VIOLET EDITION</strong>
+        <small>FICTIONAL DEMO</small>
+      </div>
+      <h3>Violet Edition</h3>
+      <p>Premium fictional digital card artwork.</p>
+      <span class="demo-label">DESIGN DEMO</span>
+    </div>
+
+    <div class="card" data-type="blue">
+      <div class="demo-card blue">
+        <small>ADRIX • DIGITAL</small>
+        <strong>OCEAN EDITION</strong>
+        <small>FICTIONAL DEMO</small>
+      </div>
+      <h3>Ocean Edition</h3>
+      <p>Modern blue digital card artwork.</p>
+      <span class="demo-label">DESIGN DEMO</span>
+    </div>
+
+    <div class="card" data-type="pink">
+      <div class="demo-card pink">
+        <small>ADRIX • DIGITAL</small>
+        <strong>ROSE EDITION</strong>
+        <small>FICTIONAL DEMO</small>
+      </div>
+      <h3>Rose Edition</h3>
+      <p>Creative pink digital card artwork.</p>
+      <span class="demo-label">DESIGN DEMO</span>
+    </div>
+
+    <div class="card" data-type="gold">
+      <div class="demo-card gold">
+        <small>ADRIX • DIGITAL</small>
+        <strong>GOLD EDITION</strong>
+        <small>FICTIONAL DEMO</small>
+      </div>
+      <h3>Gold Edition</h3>
+      <p>Elegant golden digital card artwork.</p>
+      <span class="demo-label">DESIGN DEMO</span>
+    </div>
+
+  </div>
+
+  <div class="notice">
+    <strong>Demo Notice</strong><br>
+    ADRIX CARDER is a fictional digital design showcase.
+    All cards displayed here are illustrations, not real
+    payment cards. No financial credentials or payment
+    transactions are collected or processed.
+  </div>
+
+</section>
+
+<section class="section" id="about">
+  <div class="section-heading">
+    <h2>About ADRIX CARDER</h2>
+    <p>A futuristic digital design experience built for the web.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="logo">ADRIX <span>CARDER</span></div>
+  ©️ 2026 ADRIX CARDER. All rights reserved.<br>
+  Fictional demo website.
+</footer>
+
+<script>
+function filterCards(type,button) {
+  document.querySelectorAll('.filter').forEach(btn => {
+    btn.classList.remove('active');
+  });
+
+  button.classList.add('active');
+
+  document.querySelectorAll('.card').forEach(card => {
+    card.style.display =
+      type === 'all' || card.dataset.type === type
+      ? 'block'
+      : 'none';
+  });
+}
+</script>
+
+</body>
+</html>
