@@ -6,674 +6,73 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#080810">
 <title>ADRIX CARDER | Digital Design Studio</title>
-
-<style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  background: #080810;
-  color: #fff;
-  font-family: Arial, sans-serif;
-  overflow-x: hidden;
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  width: 500px;
-  height: 500px;
-  background: #792bff;
-  filter: blur(180px);
-  opacity: .18;
-  top: 10%;
-  left: 30%;
-  pointer-events: none;
-  z-index: -1;
-}
-
-header {
-  min-height: 75px;
-  padding: 0 7%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid #242333;
-  background: rgba(8,8,16,.92);
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  backdrop-filter: blur(15px);
-}
-
-.logo {
-  font-size: 22px;
-  font-weight: 900;
-  letter-spacing: 1px;
-}
-
-.logo span {
-  color: #a66bff;
-}
-
-nav {
-  display: flex;
-  gap: 25px;
-}
-
-nav a {
-  color: #aaa;
-  text-decoration: none;
-  font-size: 14px;
-  transition: .3s;
-}
-
-nav a:hover {
-  color: #b77aff;
-}
-
-.hero {
-  text-align: center;
-  padding: 90px 20px 55px;
-  position: relative;
-}
-
-.tag {
-  display: inline-block;
-  border: 1px solid #7542bc;
-  color: #c59aff;
-  padding: 8px 18px;
-  border-radius: 30px;
-  font-size: 12px;
-  letter-spacing: 2px;
-}
-
-.hero h1 {
-  font-size: clamp(38px, 8vw, 75px);
-  margin: 25px 0 15px;
-  font-weight: 900;
-}
-
-.hero h1 span {
-  background: linear-gradient(90deg,#a46aff,#e3b4ff);
-  -webkit-background-clip: text;
-  color: transparent;
-}
-
-.hero p {
-  color: #999;
-  max-width: 540px;
-  margin: auto;
-  line-height: 1.7;
-}
-
-.hero-btn {
-  display: inline-block;
-  margin-top: 30px;
-  padding: 14px 28px;
-  background: linear-gradient(90deg,#7026db,#a35cff);
-  color: white;
-  text-decoration: none;
-  border-radius: 9px;
-  font-weight: bold;
-  transition: .3s;
-}
-
-.hero-btn:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 30px #792bff55;
-}
-
-.floating-area {
-  height: 160px;
-  position: relative;
-  overflow: hidden;
-}
-
-.float-card {
-  position: absolute;
-  width: 115px;
-  height: 72px;
-  border-radius: 12px;
-  border: 1px solid #ffffff30;
-  background: linear-gradient(135deg,#28174b,#8143c9);
-  box-shadow: 0 10px 40px #792bff30;
-  animation: float 5s ease-in-out infinite;
-}
-
-.float-card:nth-child(1) {
-  left: 15%;
-  top: 25px;
-  transform: rotate(-15deg);
-}
-
-.float-card:nth-child(2) {
-  left: 43%;
-  top: 45px;
-  background: linear-gradient(135deg,#153c50,#287b9c);
-  animation-delay: 1s;
-}
-
-.float-card:nth-child(3) {
-  right: 15%;
-  top: 20px;
-  background: linear-gradient(135deg,#4c2240,#bc4c91);
-  animation-delay: 2s;
-}
-
-@keyframes float {
-  0%,100% { translate: 0 0; }
-  50% { translate: 0 -18px; }
-}
-
-.section {
-  padding: 45px 7%;
-  position: relative;
-}
-
-.section-heading {
-  margin-bottom: 25px;
-}
-
-.section-heading h2 {
-  font-size: 27px;
-}
-
-.section-heading p {
-  color: #858594;
-  margin-top: 9px;
-  font-size: 14px;
-}
-
-.search-box {
-  width: 100%;
-  max-width: 420px;
-  margin-bottom: 22px;
-}
-
-.search-box input {
-  width: 100%;
-  padding: 14px 17px;
-  background: #11111c;
-  border: 1px solid #343044;
-  outline: none;
-  border-radius: 10px;
-  color: white;
-  font-size: 14px;
-}
-
-.search-box input:focus {
-  border-color: #9959ed;
-}
-
-.filters {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 25px;
-}
-
-.filter {
-  padding: 10px 19px;
-  border: 1px solid #343044;
-  border-radius: 25px;
-  background: #11111c;
-  color: #bbb;
-  cursor: pointer;
-  transition: .3s;
-}
-
-.filter.active,
-.filter:hover {
-  background: #7935d7;
-  color: white;
-  border-color: #7935d7;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-  gap: 20px;
-}
-
-.card {
-  background: linear-gradient(145deg,#171522,#101019);
-  border: 1px solid #30283f;
-  border-radius: 15px;
-  padding: 20px;
-  transition: .3s;
-  cursor: pointer;
-}
-
-.card:hover {
-  transform: translateY(-6px);
-  border-color: #9959ed;
-  box-shadow: 0 10px 35px #792bff20;
-}
-
-.demo-card {
-  height: 145px;
-  padding: 18px;
-  border-radius: 12px;
-  margin-bottom: 18px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background: linear-gradient(130deg,#162b62,#346ee7);
-}
-
-.demo-card.mastercard {
-  background: linear-gradient(130deg,#171717,#393939);
-}
-
-.demo-card.amex {
-  background: linear-gradient(130deg,#12365a,#227ebd);
-}
-
-.demo-card.rupay {
-  background: linear-gradient(130deg,#153e36,#258b67);
-}
-
-.demo-card small {
-  letter-spacing: 2px;
-  font-size: 10px;
-}
-
-.demo-card strong {
-  font-size: 17px;
-  letter-spacing: 1px;
-}
-
-.card h3 {
-  font-size: 17px;
-}
-
-.card p {
-  color: #9693a4;
-  font-size: 13px;
-  margin-top: 8px;
-  line-height: 1.5;
-}
-
-.demo-label {
-  display: inline-block;
-  margin-top: 13px;
-  color: #c9a5ff;
-  font-size: 11px;
-  border: 1px solid #7443aa;
-  padding: 6px 10px;
-  border-radius: 20px;
-}
-
-.notice {
-  margin-top: 30px;
-  padding: 18px;
-  border: 1px solid #47366b;
-  background: #171225;
-  border-radius: 12px;
-  color: #c7b6df;
-  line-height: 1.6;
-  font-size: 13px;
-}
-
-.empty {
-  display: none;
-  color: #aaa;
-  padding: 25px;
-  text-align: center;
-}
-
-footer {
-  margin-top: 50px;
-  padding: 35px 20px;
-  text-align: center;
-  border-top: 1px solid #292435;
-  color: #777;
-  font-size: 13px;
-  line-height: 2;
-}
-
-/* Preview popup */
-
-.preview {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.88);
-  z-index: 100;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-
-.preview.show {
-  display: flex;
-}
-
-.preview-content {
-  background: #171522;
-  border: 1px solid #7443aa;
-  border-radius: 18px;
-  padding: 25px;
-  width: 100%;
-  max-width: 420px;
-  text-align: center;
-}
-
-.preview-content .demo-card {
-  height: 190px;
-}
-
-.close-btn {
-  display: block;
-  margin: 20px auto 0;
-  background: #7935d7;
-  color: white;
-  border: none;
-  padding: 11px 25px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-@media(max-width:600px) {
-  header { padding: 0 5%; }
-  nav { gap: 12px; }
-  nav a { font-size: 11px; }
-  .logo { font-size: 17px; }
-  .hero { padding-top: 65px; }
-  .section { padding: 35px 5%; }
-  .grid { grid-template-columns: 1fr; }
-}
-
-@media(prefers-reduced-motion:reduce) {
-  *, *::before, *::after {
-    animation-duration: .01ms !important;
-    scroll-behavior: auto !important;
-    transition-duration: .01ms !important;
-  }
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <header>
   <div class="logo">ADRIX <span>CARDER</span></div>
-
   <nav>
-    <a href="#home">Home</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#about">About</a>
+    <a href="index.html">Home</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="about.html">About</a>
   </nav>
 </header>
 
-<section class="hero" id="home">
-  <div class="tag">WELCOME TO ADRIX CARDER</div>
+<main>
+  <section class="hero">
+    <div class="tag">WELCOME TO ADRIX CARDER</div>
 
-  <h1>Explore The <span>Digital World</span></h1>
-
-  <p>
-    Discover a premium collection of fictional
-    payment-network inspired digital artwork.
-    Explore creative visual designs and technology.
-  </p>
-
-  <a href="#gallery" class="hero-btn">
-    Explore Gallery →
-  </a>
-</section>
-
-<div class="floating-area">
-  <div class="float-card"></div>
-  <div class="float-card"></div>
-  <div class="float-card"></div>
-</div>
-
-<section class="section" id="gallery">
-
-  <div class="section-heading">
-    <h2>Digital Design Gallery</h2>
-    <p>Explore our payment-network inspired artwork.</p>
-  </div>
-
-  <div class="search-box">
-    <input
-      type="search"
-      id="searchInput"
-      placeholder="Search Visa, Mastercard, Amex, RuPay..."
-      oninput="searchCards()"
-    >
-  </div>
-
-  <div class="filters">
-    <button class="filter active"
-      onclick="filterCards('all',this)">All</button>
-
-    <button class="filter"
-      onclick="filterCards('visa',this)">Visa</button>
-
-    <button class="filter"
-      onclick="filterCards('mastercard',this)">Mastercard</button>
-
-    <button class="filter"
-      onclick="filterCards('amex',this)">American Express</button>
-
-    <button class="filter"
-      onclick="filterCards('rupay',this)">RuPay</button>
-  </div>
-
-  <div class="grid" id="cardGrid">
-
-    <div class="card" data-type="visa"
-      onclick="openPreview(this)">
-
-      <div class="demo-card">
-        <small>ADRIX • ARTWORK</small>
-        <strong>VISA INSPIRED</strong>
-        <small>DESIGN CONCEPT</small>
-      </div>
-
-      <h3>Visa Collection</h3>
-      <p>Blue-themed premium digital artwork.</p>
-      <span class="demo-label">FICTIONAL ARTWORK</span>
-    </div>
-
-    <div class="card" data-type="mastercard"
-      onclick="openPreview(this)">
-
-      <div class="demo-card mastercard">
-        <small>ADRIX • ARTWORK</small>
-        <strong>MASTERCARD INSPIRED</strong>
-        <small>DESIGN CONCEPT</small>
-      </div>
-
-      <h3>Mastercard Collection</h3>
-      <p>Modern dark-themed digital artwork.</p>
-      <span class="demo-label">FICTIONAL ARTWORK</span>
-    </div>
-
-    <div class="card" data-type="amex"
-      onclick="openPreview(this)">
-
-      <div class="demo-card amex">
-        <small>ADRIX • ARTWORK</small>
-        <strong>AMEX INSPIRED</strong>
-        <small>DESIGN CONCEPT</small>
-      </div>
-
-      <h3>American Express Collection</h3>
-      <p>Elegant blue digital design concept.</p>
-      <span class="demo-label">FICTIONAL ARTWORK</span>
-    </div>
-
-    <div class="card" data-type="rupay"
-      onclick="openPreview(this)">
-
-      <div class="demo-card rupay">
-        <small>ADRIX • ARTWORK</small>
-        <strong>RUPAY INSPIRED</strong>
-        <small>DESIGN CONCEPT</small>
-      </div>
-
-      <h3>RuPay Collection</h3>
-      <p>Creative green-themed digital artwork.</p>
-      <span class="demo-label">FICTIONAL ARTWORK</span>
-    </div>
-
-  </div>
-
-  <div class="empty" id="emptyMessage">
-    No matching designs found.
-  </div>
-
-  <div class="notice">
-    <strong>Design Information</strong><br>
-    ADRIX CARDER is an independent fictional design
-    showcase. All displayed card artwork is illustrative
-    and is not an actual payment card. No card credentials,
-    banking information or payment transactions are
-    collected or processed. Network names belong to their
-    respective owners.
-  </div>
-
-</section>
-
-<section class="section" id="about">
-
-  <div class="section-heading">
-    <h2>About ADRIX CARDER</h2>
+    <h1>Explore The <span>Digital World</span></h1>
 
     <p>
-      A futuristic digital design experience
-      built for creativity, technology and visual art.
+      Discover a premium collection of fictional
+      payment-network inspired digital artwork.
+      Explore creative visual designs and technology.
     </p>
+
+    <a href="gallery.html" class="hero-btn">
+      Explore Gallery →
+    </a>
+  </section>
+
+  <div class="floating-area">
+    <div class="float-card"></div>
+    <div class="float-card"></div>
+    <div class="float-card"></div>
   </div>
 
-</section>
+  <section class="section">
+    <div class="section-heading">
+      <h2>Welcome to our Design Studio</h2>
+      <p>
+        Explore creative artwork inspired by digital
+        payment-network visual styles.
+      </p>
+    </div>
+
+    <a href="gallery.html" class="hero-btn">
+      View All Designs →
+    </a>
+
+    <div class="notice">
+      <strong>Design Information</strong><br>
+      ADRIX CARDER is an independent fictional design
+      showcase. All displayed artwork is illustrative,
+      not an actual payment card. No card credentials,
+      banking information or payment transactions are
+      collected or processed. Network names belong to
+      their respective owners.
+    </div>
+  </section>
+</main>
 
 <footer>
-
   <div class="logo">ADRIX <span>CARDER</span></div>
-
   © 2026 ADRIX CARDER. All rights reserved.<br>
-
   Independent Digital Design Showcase.
-
 </footer>
-
-<!-- Artwork Preview -->
-
-<div class="preview" id="preview"
-  onclick="closePreviewOutside(event)">
-
-  <div class="preview-content">
-
-    <h2 id="previewTitle">Artwork Preview</h2>
-
-    <div id="previewArtwork"></div>
-
-    <p id="previewDescription"
-      style="color:#aaa;font-size:13px;margin-top:15px">
-      Fictional design artwork.
-    </p>
-
-    <button class="close-btn"
-      onclick="closePreview()">CLOSE</button>
-
-  </div>
-</div>
-
-<script>
-
-let currentFilter = "all";
-
-function filterCards(type,button) {
-
-  currentFilter = type;
-
-  document.querySelectorAll('.filter').forEach(btn => {
-    btn.classList.remove('active');
-  });
-
-  button.classList.add('active');
-
-  searchCards();
-}
-
-function searchCards() {
-
-  const search = document
-    .getElementById('searchInput')
-    .value.toLowerCase();
-
-  const cards = document.querySelectorAll('.card');
-
-  let visible = 0;
-
-  cards.forEach(card => {
-
-    const type = card.dataset.type;
-
-    const matchesFilter =
-      currentFilter === 'all' ||
-      type === currentFilter;
-
-    const matchesSearch =
-      card.innerText.toLowerCase().includes(search);
-
-    if(matchesFilter && matchesSearch) {
-      card.style.display = 'block';
-      visible++;
-    } else {
-      card.style.display = 'none';
-    }
-
-  });
-
-  document.getElementById('emptyMessage').style.display =
-    visible === 0 ? 'block' : 'none';
-}
-
-function openPreview(card) {
-
-  const artwork = card.querySelector('.demo-card');
-
-  document.getElementById('previewTitle').innerText =
-    card.querySelector('h3').innerText;
-
-  document.getElementById('previewDescription').innerText =
-    card.querySelector('p').innerText;
-
-  document.getElementById('previewArtwork').innerHTML =
-    artwork.outerHTML;
-
-  document.getElementById('preview').classList.add('show');
-}
-
-function closePreview() {
-  document.getElementById('preview').classList.remove('show');
-}
-
-function closePreviewOutside(event) {
-  if(event.target.id === 'preview') {
-    closePreview();
-  }
-}
-
-document.addEventListener('keydown', function(event) {
-  if(event.key === 'Escape') {
-    closePreview();
-  }
-});
-
-</script>
 
 </body>
 </html>
