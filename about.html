@@ -64,5 +64,36 @@
   <p>Creative Digital Design Showcase</p>
 </footer>
 
+<script type="module">
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
+document.body.style.visibility = 'hidden';
+
+const supabase = createClient(
+  'https://xgbjjrwdagdjnybwpiis.supabase.co',
+  'sb_publishable_ZdrIJqkv8f3fdIeyHsO89g_YBJQWt6o'
+);
+
+async function checkLogin() {
+  try {
+    const { data, error } = await supabase.auth.getSession();
+
+    if (error) throw error;
+
+    if (!data.session) {
+      window.location.replace('login.html');
+      return;
+    }
+
+    document.body.style.visibility = 'visible';
+  } catch (error) {
+    console.error('Login check failed:', error);
+    window.location.replace('login.html');
+  }
+}
+
+checkLogin();
+</script>
+
 </body>
 </html>
