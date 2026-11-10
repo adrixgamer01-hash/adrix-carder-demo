@@ -29,9 +29,7 @@
   </div>
 
   <div class="search-box">
-    <input
-      type="search"
-      id="searchInput"
+    <input type="search" id="searchInput"
       placeholder="Search Visa, Mastercard, Amex, RuPay..."
       oninput="searchCards()">
   </div>
@@ -125,5 +123,37 @@
 </footer>
 
 <script src="script.js"></script>
+
+<script type="module">
+import { createClient } from
+'https://esm.sh/@supabase/supabase-js@2';
+
+document.body.style.visibility = 'hidden';
+
+const supabase = createClient(
+  'https://xgbjjrwdagdjnybwpiis.supabase.co',
+  'sb_publishable_ZdrIJqkv8f3fdIeyHsO89g_YBJQWt6o'
+);
+
+async function checkLogin() {
+  try {
+    const { data, error } = await supabase.auth.getSession();
+    if (error) throw error;
+
+    if (!data.session) {
+      window.location.replace('login.html');
+      return;
+    }
+
+    document.body.style.visibility = 'visible';
+  } catch (error) {
+    console.error('Login check failed:', error);
+    window.location.replace('login.html');
+  }
+}
+
+checkLogin();
+</script>
+
 </body>
 </html>
