@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080810">
+  <title>Admin Panel | ADRIX CARDER</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .admin-wrap {
+      max-width: 850px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+    .admin-box {
+      background: #151521;
+      border: 1px solid #34344a;
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 22px;
+    }
+    .admin-box h2 { margin-bottom: 16px; }
+    .admin-box input,
+    .admin-box textarea,
+    .admin-box select {
+      width: 100%;
+      padding: 13px;
+      margin: 8px 0 14px;
+      border-radius: 8px;
+      border: 1px solid #44445a;
+      background: #080810;
+      color: white;
+      font: inherit;
+    }
+    .admin-box textarea { min-height: 110px; }
+    .admin-box button {
+      padding: 12px 18px;
+      border: 0;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      margin: 5px 5px 5px 0;
+    }
+    .admin-status { margin-top: 12px; }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="logo">ADRIX CARDER</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="about.html">About</a>
+  </nav>
+</header>
+
+<main class="admin-wrap">
+  <h1>Admin Panel</h1>
+  <p>Manage your website content.</p>
+
+  <section class="admin-box" id="loginSection">
+    <h2>Admin Login</h2>
+
+    <form id="loginForm">
+      <label for="adminEmail">Email</label>
+      <input id="adminEmail" type="email"
+        placeholder="Admin email" required>
+
+      <label for="adminPassword">Password</label>
+      <input id="adminPassword" type="password"
+        placeholder="Admin password" required>
+
+      <button type="submit">LOGIN</button>
+    </form>
+
+    <p class="admin-status" id="loginStatus" aria-live="polite"></p>
+  </section>
+
+  <section id="dashboard" hidden>
+    <div class="admin-box">
+      <h2>Website Settings</h2>
+
+      <label for="siteTitle">Website Title</label>
+      <input id="siteTitle" type="text">
+
+      <label for="heroDescription">Home Description</label>
+      <textarea id="heroDescription"></textarea>
+
+      <label for="aboutText">About Text</label>
+      <textarea id="aboutText"></textarea>
+
+      <button type="button" id="saveSettings">SAVE SETTINGS</button>
+      <p id="settingsStatus" class="admin-status" aria-live="polite"></p>
+    </div>
+
+    <div class="admin-box">
+      <h2>Add Gallery Artwork</h2>
+
+      <label for="artTitle">Artwork Title</label>
+      <input id="artTitle" type="text">
+
+      <label for="artCategory">Category</label>
+      <select id="artCategory">
+        <option value="visa">Visa</option>
+        <option value="mastercard">Mastercard</option>
+        <option value="amex">American Express</option>
+        <option value="rupay">RuPay</option>
+      </select>
+
+      <label for="artDescription">Description</label>
+      <textarea id="artDescription"></textarea>
+
+      <label for="artImage">Artwork Image URL</label>
+      <input id="artImage" type="url"
+        placeholder="https://example.com/artwork.jpg">
+
+      <button type="button" id="addArtwork">ADD ARTWORK</button>
+      <p id="galleryStatus" class="admin-status" aria-live="polite"></p>
+    </div>
+
+    <div class="admin-box">
+      <h2>Manage Gallery</h2>
+      <div id="galleryList"></div>
+    </div>
+
+    <div class="admin-box">
+      <button type="button" id="logoutButton">LOGOUT</button>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <p>© 2026 ADRIX CARDER</p>
+  <p>Admin Access</p>
+</footer>
+
+<script type="module" src="admin.js"></script>
+</body>
+</html>
