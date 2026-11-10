@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080810">
+<title>Gallery | ADRIX CARDER</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  <div class="logo">ADRIX <span>CARDER</span></div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<section class="section" id="gallery">
+
+  <div class="section-heading">
+    <h2>Digital Design Gallery</h2>
+    <p>Explore our fictional payment-network inspired artwork.</p>
+  </div>
+
+  <div class="search-box">
+    <input
+      type="search"
+      id="searchInput"
+      placeholder="Search Visa, Mastercard, Amex, RuPay..."
+      oninput="searchCards()">
+  </div>
+
+  <div class="filters">
+    <button class="filter active" onclick="filterCards('all',this)">All</button>
+    <button class="filter" onclick="filterCards('visa',this)">Visa</button>
+    <button class="filter" onclick="filterCards('mastercard',this)">Mastercard</button>
+    <button class="filter" onclick="filterCards('amex',this)">American Express</button>
+    <button class="filter" onclick="filterCards('rupay',this)">RuPay</button>
+  </div>
+
+  <div class="grid" id="cardGrid">
+
+    <div class="card" data-type="visa" onclick="openPreview(this)">
+      <div class="demo-card">
+        <small>ADRIX • ARTWORK</small>
+        <strong>VISA INSPIRED</strong>
+        <small>DESIGN CONCEPT</small>
+      </div>
+      <h3>Visa Collection</h3>
+      <p>Blue-themed premium digital artwork.</p>
+      <span class="demo-label">FICTIONAL ARTWORK</span>
+    </div>
+
+    <div class="card" data-type="mastercard" onclick="openPreview(this)">
+      <div class="demo-card mastercard">
+        <small>ADRIX • ARTWORK</small>
+        <strong>MASTERCARD INSPIRED</strong>
+        <small>DESIGN CONCEPT</small>
+      </div>
+      <h3>Mastercard Collection</h3>
+      <p>Modern dark-themed digital artwork.</p>
+      <span class="demo-label">FICTIONAL ARTWORK</span>
+    </div>
+
+    <div class="card" data-type="amex" onclick="openPreview(this)">
+      <div class="demo-card amex">
+        <small>ADRIX • ARTWORK</small>
+        <strong>AMEX INSPIRED</strong>
+        <small>DESIGN CONCEPT</small>
+      </div>
+      <h3>American Express Collection</h3>
+      <p>Elegant blue digital design concept.</p>
+      <span class="demo-label">FICTIONAL ARTWORK</span>
+    </div>
+
+    <div class="card" data-type="rupay" onclick="openPreview(this)">
+      <div class="demo-card rupay">
+        <small>ADRIX • ARTWORK</small>
+        <strong>RUPAY INSPIRED</strong>
+        <small>DESIGN CONCEPT</small>
+      </div>
+      <h3>RuPay Collection</h3>
+      <p>Creative green-themed digital artwork.</p>
+      <span class="demo-label">FICTIONAL ARTWORK</span>
+    </div>
+
+  </div>
+
+  <div class="empty" id="emptyMessage">
+    No matching designs found.
+  </div>
+
+  <div class="notice">
+    <strong>Design Information</strong><br>
+    ADRIX CARDER is an independent fictional design
+    showcase. These are illustrative designs, not actual
+    payment cards. No payment credentials or transactions
+    are collected or processed.
+  </div>
+
+</section>
+</main>
+
+<div class="preview" id="preview" onclick="closePreviewOutside(event)">
+  <div class="preview-content">
+    <h2 id="previewTitle">Artwork Preview</h2>
+    <div id="previewArtwork"></div>
+    <p id="previewDescription" style="color:#aaa;font-size:13px;margin-top:15px">
+      Fictional design artwork.
+    </p>
+    <button class="close-btn" onclick="closePreview()">CLOSE</button>
+  </div>
+</div>
+
+<footer>
+  <div class="logo">ADRIX <span>CARDER</span></div>
+  © 2026 ADRIX CARDER. All rights reserved.<br>
+  Independent Digital Design Showcase.
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
