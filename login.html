@@ -1,0 +1,284 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080810">
+<title>Visitor Login | ADRIX CARDER</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  min-height:100vh;
+  margin:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:22px;
+  background:
+    radial-gradient(ellipse at 15% 15%,#6928ff35,transparent 42%),
+    radial-gradient(ellipse at 85% 85%,#1748ff30,transparent 42%),
+    #080810;
+  color:white;
+  font-family:Arial,sans-serif;
+}
+
+.login-wrap{width:100%;max-width:440px}
+
+.login-card{
+  padding:35px 30px;
+  border:1px solid #ffffff20;
+  border-radius:22px;
+  background:linear-gradient(145deg,#191525ee,#10101bee);
+  box-shadow:0 25px 90px #0009,0 0 45px #873bff18;
+  backdrop-filter:blur(18px);
+  animation:appear .7s ease;
+}
+
+@keyframes appear{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.brand{
+  text-align:center;
+  font-size:25px;
+  font-weight:900;
+  letter-spacing:2px;
+  background:linear-gradient(90deg,#b18aff,#fff,#8a5cff);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.tagline{
+  text-align:center;
+  color:#9992ad;
+  font-size:12px;
+  letter-spacing:3px;
+  margin-top:9px;
+}
+
+.heading{text-align:center;font-size:27px;margin:35px 0 8px}
+.subheading{text-align:center;color:#aaa4b8;font-size:13px;margin-bottom:28px}
+
+.field-label{
+  display:block;
+  font-size:13px;
+  color:#d7d0e5;
+  margin:17px 0 9px;
+}
+
+.field{
+  width:100%;
+  padding:15px;
+  border-radius:11px;
+  border:1px solid #ffffff20;
+  background:#080810;
+  color:white;
+  outline:none;
+  font-size:14px;
+}
+
+.field:focus{
+  border-color:#a06aff;
+  box-shadow:0 0 0 3px #914dff20;
+}
+
+.password-wrap{position:relative}
+.password-wrap input{padding-right:65px}
+
+.show-password{
+  position:absolute;
+  right:12px;
+  top:50%;
+  transform:translateY(-50%);
+  color:#b99aff;
+  border:0;
+  background:none;
+  cursor:pointer;
+  font-size:12px;
+}
+
+.forgot-row{display:flex;justify-content:flex-end;margin-top:13px}
+
+.forgot-row button{
+  color:#b99aff;
+  font-size:12px;
+  background:none;
+  border:0;
+  cursor:pointer;
+}
+
+.login-btn{
+  width:100%;
+  padding:15px;
+  margin-top:24px;
+  border:0;
+  border-radius:11px;
+  background:linear-gradient(100deg,#793bff,#a65cff);
+  color:white;
+  font-size:14px;
+  font-weight:800;
+  letter-spacing:1px;
+  cursor:pointer;
+  box-shadow:0 8px 25px #843cff35;
+}
+
+.login-btn:hover{transform:translateY(-2px)}
+
+.divider{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:25px 0;
+  color:#817b90;
+  font-size:11px;
+}
+
+.divider:before,.divider:after{
+  content:"";
+  height:1px;
+  flex:1;
+  background:#ffffff20;
+}
+
+.google-btn{
+  width:100%;
+  padding:13px;
+  border-radius:11px;
+  border:1px solid #ffffff25;
+  background:#ffffff08;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.google-icon{width:19px;height:19px}
+
+.switch-row{
+  text-align:center;
+  color:#aaa1bc;
+  font-size:12px;
+  margin-top:23px;
+}
+
+.switch-row button{
+  color:#c29aff;
+  border:0;
+  background:none;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.message{
+  font-size:12px;
+  color:#d5bfff;
+  text-align:center;
+  margin-top:15px;
+  min-height:16px;
+}
+
+.back{
+  display:block;
+  text-align:center;
+  color:#aaa1bc;
+  font-size:12px;
+  text-decoration:none;
+  margin-top:25px;
+}
+
+.security{
+  text-align:center;
+  color:#777184;
+  font-size:10px;
+  margin-top:22px;
+}
+
+[hidden]{display:none!important}
+
+@media(max-width:480px){
+  .login-card{padding:28px 22px}
+  .heading{font-size:24px}
+}
+</style>
+</head>
+
+<body>
+
+<main class="login-wrap">
+<section class="login-card">
+
+  <div class="brand">ADRIX CARDER</div>
+  <div class="tagline">DIGITAL DESIGN STUDIO</div>
+
+  <h1 class="heading" id="formHeading">Welcome Back</h1>
+  <p class="subheading" id="formSubtitle">
+    Sign in to your visitor account
+  </p>
+
+  <form id="authForm">
+
+    <div id="nameGroup" hidden>
+      <label class="field-label" for="fullName">FULL NAME</label>
+      <input class="field" type="text" id="fullName"
+        placeholder="Enter your name" autocomplete="name">
+    </div>
+
+    <label class="field-label" for="email">EMAIL ADDRESS</label>
+    <input class="field" type="email" id="email"
+      placeholder="Enter your email" autocomplete="email" required>
+
+    <label class="field-label" for="password">PASSWORD</label>
+    <div class="password-wrap">
+      <input class="field" type="password" id="password"
+        placeholder="Enter your password"
+        autocomplete="current-password" required minlength="6">
+      <button type="button" class="show-password"
+        id="togglePassword">SHOW</button>
+    </div>
+
+    <div class="forgot-row" id="forgotRow">
+      <button type="button" id="forgotPassword">Forgot Password?</button>
+    </div>
+
+    <button class="login-btn" type="submit" id="submitButton">
+      SIGN IN →
+    </button>
+  </form>
+
+  <div class="divider">OR CONTINUE WITH</div>
+
+  <button class="google-btn" type="button" id="googleLogin">
+    <svg class="google-icon" viewBox="0 0 48 48" aria-hidden="true">
+      <path fill="#4285F4" d="M43.6 24.5c0-1.4-.1-2.8-.4-4.1H24v7.8h11a9.4 9.4 0 0 1-4.1 6.2v5.1h6.6c3.9-3.6 6.1-8.8 6.1-15z"/>
+      <path fill="#34A853" d="M24 44c5.5 0 10.1-1.8 13.5-4.9l-6.6-5.1c-1.8 1.2-4.1 2-6.9 2-5.3 0-9.8-3.6-11.4-8.4H5.8v5.2A20 20 0 0 0 24 44z"/>
+      <path fill="#FBBC05" d="M12.6 27.6a12 12 0 0 1 0-7.2v-5.2H5.8a20 20 0 0 0 0 17.6z"/>
+      <path fill="#EA4335" d="M24 12c3 0 5.7 1 7.8 3l5.8-5.8C34.1 5.9 29.5 4 24 4A20 20 0 0 0 5.8 15.2l6.8 5.2C14.2 15.6 18.7 12 24 12z"/>
+    </svg>
+    Continue with Google
+  </button>
+
+  <div class="switch-row">
+    <span id="switchText">New here?</span>
+    <button type="button" id="switchMode">Create Account</button>
+  </div>
+
+  <p class="message" id="authMessage" aria-live="polite"></p>
+
+  <a class="back" href="index.html">← Back to Website</a>
+
+  <div class="security">SECURE VISITOR ACCOUNT • ADRIX CARDER</div>
+
+</section>
+</main>
+
+<script type="module" src="login.js"></script>
+</body>
+</html>
