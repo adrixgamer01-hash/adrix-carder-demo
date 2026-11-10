@@ -1,16 +1,21 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#080810">
-<title>ADRIX CARDER | Demo Gallery</title>
+<title>ADRIX CARDER | Digital Design Studio</title>
 
 <style>
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -31,16 +36,17 @@ body::before {
   top: 10%;
   left: 30%;
   pointer-events: none;
+  z-index: -1;
 }
 
 header {
-  height: 75px;
+  min-height: 75px;
   padding: 0 7%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid #242333;
-  background: rgba(8,8,16,.85);
+  background: rgba(8,8,16,.92);
   position: sticky;
   top: 0;
   z-index: 10;
@@ -66,6 +72,7 @@ nav a {
   color: #aaa;
   text-decoration: none;
   font-size: 14px;
+  transition: .3s;
 }
 
 nav a:hover {
@@ -116,6 +123,12 @@ nav a:hover {
   text-decoration: none;
   border-radius: 9px;
   font-weight: bold;
+  transition: .3s;
+}
+
+.hero-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px #792bff55;
 }
 
 .floating-area {
@@ -179,6 +192,27 @@ nav a:hover {
   font-size: 14px;
 }
 
+.search-box {
+  width: 100%;
+  max-width: 420px;
+  margin-bottom: 22px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 14px 17px;
+  background: #11111c;
+  border: 1px solid #343044;
+  outline: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 14px;
+}
+
+.search-box input:focus {
+  border-color: #9959ed;
+}
+
 .filters {
   display: flex;
   gap: 10px;
@@ -193,6 +227,7 @@ nav a:hover {
   background: #11111c;
   color: #bbb;
   cursor: pointer;
+  transition: .3s;
 }
 
 .filter.active,
@@ -214,6 +249,7 @@ nav a:hover {
   border-radius: 15px;
   padding: 20px;
   transition: .3s;
+  cursor: pointer;
 }
 
 .card:hover {
@@ -230,19 +266,19 @@ nav a:hover {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: linear-gradient(130deg,#312052,#8c48d5);
+  background: linear-gradient(130deg,#162b62,#346ee7);
 }
 
-.demo-card.blue {
-  background: linear-gradient(130deg,#173c52,#3985aa);
+.demo-card.mastercard {
+  background: linear-gradient(130deg,#171717,#393939);
 }
 
-.demo-card.pink {
-  background: linear-gradient(130deg,#50223d,#b74e86);
+.demo-card.amex {
+  background: linear-gradient(130deg,#12365a,#227ebd);
 }
 
-.demo-card.gold {
-  background: linear-gradient(130deg,#514020,#ae914b);
+.demo-card.rupay {
+  background: linear-gradient(130deg,#153e36,#258b67);
 }
 
 .demo-card small {
@@ -287,6 +323,13 @@ nav a:hover {
   font-size: 13px;
 }
 
+.empty {
+  display: none;
+  color: #aaa;
+  padding: 25px;
+  text-align: center;
+}
+
 footer {
   margin-top: 50px;
   padding: 35px 20px;
@@ -297,6 +340,48 @@ footer {
   line-height: 2;
 }
 
+/* Preview popup */
+
+.preview {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.88);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.preview.show {
+  display: flex;
+}
+
+.preview-content {
+  background: #171522;
+  border: 1px solid #7443aa;
+  border-radius: 18px;
+  padding: 25px;
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+}
+
+.preview-content .demo-card {
+  height: 190px;
+}
+
+.close-btn {
+  display: block;
+  margin: 20px auto 0;
+  background: #7935d7;
+  color: white;
+  border: none;
+  padding: 11px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
 @media(max-width:600px) {
   header { padding: 0 5%; }
   nav { gap: 12px; }
@@ -304,6 +389,15 @@ footer {
   .logo { font-size: 17px; }
   .hero { padding-top: 65px; }
   .section { padding: 35px 5%; }
+  .grid { grid-template-columns: 1fr; }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
 }
 </style>
 </head>
@@ -312,6 +406,7 @@ footer {
 
 <header>
   <div class="logo">ADRIX <span>CARDER</span></div>
+
   <nav>
     <a href="#home">Home</a>
     <a href="#gallery">Gallery</a>
@@ -321,12 +416,18 @@ footer {
 
 <section class="hero" id="home">
   <div class="tag">WELCOME TO ADRIX CARDER</div>
+
   <h1>Explore The <span>Digital World</span></h1>
+
   <p>
-    Discover our futuristic digital card collection.
-    A creative showcase of fictional card designs and technology.
+    Discover a premium collection of fictional
+    payment-network inspired digital artwork.
+    Explore creative visual designs and technology.
   </p>
-  <a href="#gallery" class="hero-btn">Explore Gallery →</a>
+
+  <a href="#gallery" class="hero-btn">
+    Explore Gallery →
+  </a>
 </section>
 
 <div class="floating-area">
@@ -338,104 +439,240 @@ footer {
 <section class="section" id="gallery">
 
   <div class="section-heading">
-    <h2>Digital Card Gallery</h2>
-    <p>Explore our fictional design collection.</p>
+    <h2>Digital Design Gallery</h2>
+    <p>Explore our payment-network inspired artwork.</p>
+  </div>
+
+  <div class="search-box">
+    <input
+      type="search"
+      id="searchInput"
+      placeholder="Search Visa, Mastercard, Amex, RuPay..."
+      oninput="searchCards()"
+    >
   </div>
 
   <div class="filters">
-    <button class="filter active" onclick="filterCards('all',this)">All</button>
-    <button class="filter" onclick="filterCards('purple',this)">Purple</button>
-    <button class="filter" onclick="filterCards('blue',this)">Blue</button>
-    <button class="filter" onclick="filterCards('pink',this)">Pink</button>
-    <button class="filter" onclick="filterCards('gold',this)">Gold</button>
+    <button class="filter active"
+      onclick="filterCards('all',this)">All</button>
+
+    <button class="filter"
+      onclick="filterCards('visa',this)">Visa</button>
+
+    <button class="filter"
+      onclick="filterCards('mastercard',this)">Mastercard</button>
+
+    <button class="filter"
+      onclick="filterCards('amex',this)">American Express</button>
+
+    <button class="filter"
+      onclick="filterCards('rupay',this)">RuPay</button>
   </div>
 
-  <div class="grid">
+  <div class="grid" id="cardGrid">
 
-    <div class="card" data-type="purple">
+    <div class="card" data-type="visa"
+      onclick="openPreview(this)">
+
       <div class="demo-card">
-        <small>ADRIX • DIGITAL</small>
-        <strong>VIOLET EDITION</strong>
-        <small>FICTIONAL DEMO</small>
+        <small>ADRIX • ARTWORK</small>
+        <strong>VISA INSPIRED</strong>
+        <small>DESIGN CONCEPT</small>
       </div>
-      <h3>Violet Edition</h3>
-      <p>Premium fictional digital card artwork.</p>
-      <span class="demo-label">DESIGN DEMO</span>
+
+      <h3>Visa Collection</h3>
+      <p>Blue-themed premium digital artwork.</p>
+      <span class="demo-label">FICTIONAL ARTWORK</span>
     </div>
 
-    <div class="card" data-type="blue">
-      <div class="demo-card blue">
-        <small>ADRIX • DIGITAL</small>
-        <strong>OCEAN EDITION</strong>
-        <small>FICTIONAL DEMO</small>
+    <div class="card" data-type="mastercard"
+      onclick="openPreview(this)">
+
+      <div class="demo-card mastercard">
+        <small>ADRIX • ARTWORK</small>
+        <strong>MASTERCARD INSPIRED</strong>
+        <small>DESIGN CONCEPT</small>
       </div>
-      <h3>Ocean Edition</h3>
-      <p>Modern blue digital card artwork.</p>
-      <span class="demo-label">DESIGN DEMO</span>
+
+      <h3>Mastercard Collection</h3>
+      <p>Modern dark-themed digital artwork.</p>
+      <span class="demo-label">FICTIONAL ARTWORK</span>
     </div>
 
-    <div class="card" data-type="pink">
-      <div class="demo-card pink">
-        <small>ADRIX • DIGITAL</small>
-        <strong>ROSE EDITION</strong>
-        <small>FICTIONAL DEMO</small>
+    <div class="card" data-type="amex"
+      onclick="openPreview(this)">
+
+      <div class="demo-card amex">
+        <small>ADRIX • ARTWORK</small>
+        <strong>AMEX INSPIRED</strong>
+        <small>DESIGN CONCEPT</small>
       </div>
-      <h3>Rose Edition</h3>
-      <p>Creative pink digital card artwork.</p>
-      <span class="demo-label">DESIGN DEMO</span>
+
+      <h3>American Express Collection</h3>
+      <p>Elegant blue digital design concept.</p>
+      <span class="demo-label">FICTIONAL ARTWORK</span>
     </div>
 
-    <div class="card" data-type="gold">
-      <div class="demo-card gold">
-        <small>ADRIX • DIGITAL</small>
-        <strong>GOLD EDITION</strong>
-        <small>FICTIONAL DEMO</small>
+    <div class="card" data-type="rupay"
+      onclick="openPreview(this)">
+
+      <div class="demo-card rupay">
+        <small>ADRIX • ARTWORK</small>
+        <strong>RUPAY INSPIRED</strong>
+        <small>DESIGN CONCEPT</small>
       </div>
-      <h3>Gold Edition</h3>
-      <p>Elegant golden digital card artwork.</p>
-      <span class="demo-label">DESIGN DEMO</span>
+
+      <h3>RuPay Collection</h3>
+      <p>Creative green-themed digital artwork.</p>
+      <span class="demo-label">FICTIONAL ARTWORK</span>
     </div>
 
+  </div>
+
+  <div class="empty" id="emptyMessage">
+    No matching designs found.
   </div>
 
   <div class="notice">
-    <strong>Demo Notice</strong><br>
-    ADRIX CARDER is a fictional digital design showcase.
-    All cards displayed here are illustrations, not real
-    payment cards. No financial credentials or payment
-    transactions are collected or processed.
+    <strong>Design Information</strong><br>
+    ADRIX CARDER is an independent fictional design
+    showcase. All displayed card artwork is illustrative
+    and is not an actual payment card. No card credentials,
+    banking information or payment transactions are
+    collected or processed. Network names belong to their
+    respective owners.
   </div>
 
 </section>
 
 <section class="section" id="about">
+
   <div class="section-heading">
     <h2>About ADRIX CARDER</h2>
-    <p>A futuristic digital design experience built for the web.</p>
+
+    <p>
+      A futuristic digital design experience
+      built for creativity, technology and visual art.
+    </p>
   </div>
+
 </section>
 
 <footer>
+
   <div class="logo">ADRIX <span>CARDER</span></div>
-  ©️ 2026 ADRIX CARDER. All rights reserved.<br>
-  Fictional demo website.
+
+  © 2026 ADRIX CARDER. All rights reserved.<br>
+
+  Independent Digital Design Showcase.
+
 </footer>
 
+<!-- Artwork Preview -->
+
+<div class="preview" id="preview"
+  onclick="closePreviewOutside(event)">
+
+  <div class="preview-content">
+
+    <h2 id="previewTitle">Artwork Preview</h2>
+
+    <div id="previewArtwork"></div>
+
+    <p id="previewDescription"
+      style="color:#aaa;font-size:13px;margin-top:15px">
+      Fictional design artwork.
+    </p>
+
+    <button class="close-btn"
+      onclick="closePreview()">CLOSE</button>
+
+  </div>
+</div>
+
 <script>
+
+let currentFilter = "all";
+
 function filterCards(type,button) {
+
+  currentFilter = type;
+
   document.querySelectorAll('.filter').forEach(btn => {
     btn.classList.remove('active');
   });
 
   button.classList.add('active');
 
-  document.querySelectorAll('.card').forEach(card => {
-    card.style.display =
-      type === 'all' || card.dataset.type === type
-      ? 'block'
-      : 'none';
-  });
+  searchCards();
 }
+
+function searchCards() {
+
+  const search = document
+    .getElementById('searchInput')
+    .value.toLowerCase();
+
+  const cards = document.querySelectorAll('.card');
+
+  let visible = 0;
+
+  cards.forEach(card => {
+
+    const type = card.dataset.type;
+
+    const matchesFilter =
+      currentFilter === 'all' ||
+      type === currentFilter;
+
+    const matchesSearch =
+      card.innerText.toLowerCase().includes(search);
+
+    if(matchesFilter && matchesSearch) {
+      card.style.display = 'block';
+      visible++;
+    } else {
+      card.style.display = 'none';
+    }
+
+  });
+
+  document.getElementById('emptyMessage').style.display =
+    visible === 0 ? 'block' : 'none';
+}
+
+function openPreview(card) {
+
+  const artwork = card.querySelector('.demo-card');
+
+  document.getElementById('previewTitle').innerText =
+    card.querySelector('h3').innerText;
+
+  document.getElementById('previewDescription').innerText =
+    card.querySelector('p').innerText;
+
+  document.getElementById('previewArtwork').innerHTML =
+    artwork.outerHTML;
+
+  document.getElementById('preview').classList.add('show');
+}
+
+function closePreview() {
+  document.getElementById('preview').classList.remove('show');
+}
+
+function closePreviewOutside(event) {
+  if(event.target.id === 'preview') {
+    closePreview();
+  }
+}
+
+document.addEventListener('keydown', function(event) {
+  if(event.key === 'Escape') {
+    closePreview();
+  }
+});
+
 </script>
 
 </body>
