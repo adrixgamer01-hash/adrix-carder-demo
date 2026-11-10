@@ -7,6 +7,55 @@
 <meta name="theme-color" content="#080810">
 <title>ADRIX CARDER | Digital Design Studio</title>
 <link rel="stylesheet" href="style.css">
+
+<style>
+.profile-area {
+  position: relative;
+  display: inline-block;
+  margin-left: 12px;
+}
+.profile-btn {
+  background: #191526;
+  color: white;
+  border: 1px solid #8b5cf6;
+  padding: 9px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.profile-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 45px;
+  min-width: 210px;
+  padding: 15px;
+  background: #15121f;
+  border: 1px solid #8b5cf6;
+  border-radius: 10px;
+  z-index: 9999;
+  color: white;
+  overflow-wrap: anywhere;
+}
+.profile-menu.show {
+  display: block;
+}
+.profile-email {
+  font-size: 13px;
+  color: #c4b5fd;
+  margin-bottom: 12px;
+}
+.logout-btn {
+  width: 100%;
+  padding: 10px;
+  border: 0;
+  border-radius: 7px;
+  background: #8b5cf6;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+</style>
 </head>
 
 <body>
@@ -17,6 +66,19 @@
     <a href="index.html">Home</a>
     <a href="gallery.html">Gallery</a>
     <a href="about.html">About</a>
+
+    <div class="profile-area">
+      <button class="profile-btn" id="profileBtn" type="button">
+        👤 Profile
+      </button>
+
+      <div class="profile-menu" id="profileMenu">
+        <div class="profile-email" id="profileEmail">Loading...</div>
+        <button class="logout-btn" id="logoutBtn" type="button">
+          Logout
+        </button>
+      </div>
+    </div>
   </nav>
 </header>
 
@@ -85,6 +147,11 @@ const supabase = createClient(
   'sb_publishable_ZdrIJqkv8f3fdIeyHsO89g_YBJQWt6o'
 );
 
+const profileBtn = document.getElementById('profileBtn');
+const profileMenu = document.getElementById('profileMenu');
+const profileEmail = document.getElementById('profileEmail');
+const logoutBtn = document.getElementById('logoutBtn');
+
 async function checkLogin() {
   try {
     const { data, error } = await supabase.auth.getSession();
@@ -96,14 +163,40 @@ async function checkLogin() {
       return;
     }
 
+    profileEmail.textContent = data.session.user.email || 'Visitor account';
     document.body.style.visibility = 'visible';
 
   } catch (error) {
     console.error('Login check failed:', error);
-    document.body.style.visibility = 'visible';
-    alert('Login check failed. Please refresh the page.');
+    window.location.replace('login.html');
   }
 }
+
+profileBtn.addEventListener('click', () => {
+  profileMenu.classList.toggle('show');
+});
+
+document.addEventListener('click', (event) => {
+  if (!event.target.closest('.profile-area')) {
+    profileMenu.classList.remove('show');
+  }
+});
+
+logoutBtn.addEventListener('click', async () => {
+  logoutBtn.disabled = true;
+  logoutBtn.textContent = 'Logging out...';
+
+  const { error } = await supabase.auth.signOut();
+
+  if (error) {
+    alert('Logout failed. Please try again.');
+    logoutBtn.disabled = false;
+    logoutBtn.textContent = 'Logout';
+    return;
+  }
+
+  window.location.replace('login.html');
+});
 
 checkLogin();
 </script>
